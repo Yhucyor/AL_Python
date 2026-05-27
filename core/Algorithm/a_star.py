@@ -4,7 +4,7 @@ from collections import deque
 from core.ulities import solution
 from core import globals as g
 
-def A_Start(problem_ma_tran):
+def A_Star(problem_ma_tran):
     def mis_g(ma_tran):
         g_value = 0
         for i in range(0, 3):
