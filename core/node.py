@@ -2,11 +2,14 @@ from core.globals import goal_ma_tran
 from core import globals as g
 
 class Node():
-    def __init__(self, ma_tran, parent = None, action = "_", cost = 0):
+    def __init__(self, ma_tran, parent = None, action = "_", cost = 0, g = 0, h = 0):
         self.ma_tran = ma_tran
         self.parent = parent 
         self.action = action
         self.cost = cost
+        self.g = 0
+        self.h = 0
+        
     def isGoal(self):
         for i in range(3):
             for j in range(3):

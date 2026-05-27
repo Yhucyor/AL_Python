@@ -4,3 +4,5 @@ from .dfs import DFS
 from .gs import Greedy_Search 
 from .ids import IDS
 from .usc import UCS
+from .a_start import A_Start
+from .ida import IDA
