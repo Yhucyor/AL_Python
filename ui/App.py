@@ -3,7 +3,8 @@ from tkinter import ttk
 from tkinter import messagebox
 import json 
 import threading
-from core.Algorithm import BFS1, BFS2, DFS, IDS, UCS, Greedy_Search, A_Star, IDA
+#Thêm thuật toán 
+from core.Algorithm import BFS1, BFS2, DFS, IDS, UCS, Greedy_Search, A_Star, IDA, SHC, SHC_Highest
 
 from core import globals as g
 
@@ -78,7 +79,8 @@ def UIPuzzle():
     bfs_label.grid(row = 0, column = 0, padx = 1, pady = 7, sticky = "nw")
 
     #2. Thêm Combo Box
-    list_bfs = ["BFS1", "BFS2", "DFS", "IDS", "UCS", "Greedy_Search", "A_Star", "IDA"]
+    #Thêm thuật toán 
+    list_bfs = ["BFS1", "BFS2", "DFS", "IDS", "UCS", "Greedy_Search", "A_Star", "IDA", "SHC", "SHC_Highest"]
     bfs_combobox = ttk.Combobox(dashboard_frame, values = list_bfs, state = "readonly",width = 10)
     bfs_combobox.current(0)
     bfs_combobox.grid(row = 0, column = 1, padx = 1, pady = 7, sticky = "nw")
@@ -91,7 +93,7 @@ def UIPuzzle():
         g.tk_da_duyet = 0
         g.tk_sinh_ra = 0
 
-        solvers = {"BFS1": BFS1, "BFS2": BFS2, "DFS": DFS, "IDS": IDS, "UCS": UCS, "Greedy_Search": Greedy_Search, "A_Star": A_Star, "IDA": IDA}        
+        solvers = {"BFS1": BFS1, "BFS2": BFS2, "DFS": DFS, "IDS": IDS, "UCS": UCS, "Greedy_Search": Greedy_Search, "A_Star": A_Star, "IDA": IDA, "SHC": SHC, "SHC_Highest": SHC_Highest}        
         sol = solvers[che_do](g.ma_tran_puzzle)
 
         # Cập nhật GUI sau khi xong

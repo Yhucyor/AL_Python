@@ -6,3 +6,5 @@ from .ids import IDS
 from .usc import UCS
 from .a_star import A_Star
 from .ida import IDA
+from .simple_hill_climbing import SHC
+from .simple_hill_climbing_highest import SHC_Highest
