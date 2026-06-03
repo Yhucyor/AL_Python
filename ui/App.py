@@ -80,8 +80,8 @@ def UIPuzzle():
 
     #2. Thêm Combo Box
     #Thêm thuật toán 
-    list_bfs = ["BFS1", "BFS2", "DFS", "IDS", "UCS", "Greedy_Search", "A_Star", "IDA", "SHC", "SHC_Highest",
-                "stochastics_hill_climbing", "random_restart_hill_climbing", "local_beam_search"]
+    list_bfs = ["Breadth-First Search 1", "Breadth-First Search 2", "Depth-First Search", "Iterative Deepening Search", "Uniform Cost Search", "Greedy Best-First Search", "A* Search", "Iterative Deepening A*", "Simple Hill Climbing", "Steepest-Ascent Hill Climbing",
+                "Stochastic Hill Climbing", "Random-Restart Hill Climbing", "Local Beam Search"]
     bfs_combobox = ttk.Combobox(dashboard_frame, values = list_bfs, state = "readonly",width = 21)
     bfs_combobox.current(0)
     bfs_combobox.grid(row = 0, column = 0, columnspan = 2,  padx = 1, pady = 7, sticky = "nw")
@@ -94,8 +94,8 @@ def UIPuzzle():
         g.tk_da_duyet = 0
         g.tk_sinh_ra = 0
 
-        solvers = {"BFS1": BFS1, "BFS2": BFS2, "DFS": DFS, "IDS": IDS, "UCS": UCS, "Greedy_Search": Greedy_Search, "A_Star": A_Star, "IDA": IDA, "SHC": SHC, "SHC_Highest": SHC_Highest,
-                   "stochastics_hill_climbing": stochastics_hill_climbing, "random_restart_hill_climbing": random_restart_hill_climbing, "local_beam_search": local_beam_search}        
+        solvers = {"Breadth-First Search 1": BFS1, "Breadth-First Search 2": BFS2, "Depth-First Search": DFS, "Iterative Deepening Search": IDS, "Uniform Cost Search": UCS, "Greedy Best-First Search": Greedy_Search, "A* Search": A_Star, "Iterative Deepening A*": IDA, "Simple Hill Climbing": SHC, "Steepest-Ascent Hill Climbing": SHC_Highest,
+                   "Stochastic Hill Climbing": stochastics_hill_climbing, "Random-Restart Hill Climbing": random_restart_hill_climbing, "Local Beam Search": local_beam_search}        
         sol = solvers[che_do](g.ma_tran_puzzle)
 
         # Cập nhật GUI sau khi xong
