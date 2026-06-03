@@ -6,7 +6,7 @@ from core.ulities import manhattan
 from core import globals as g
 from random import choice
 
-def stochastics_hill_climbing(problem_ma_trix):
+def stochastic_hill_climbing(problem_ma_trix):
     cur_node = Node(problem_ma_trix)
     cur_node.cost = manhattan(problem_ma_trix)
 

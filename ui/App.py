@@ -4,8 +4,7 @@ from tkinter import messagebox
 import json 
 import threading
 #Thêm thuật toán 
-from core.Algorithm import BFS1, BFS2, DFS, IDS, UCS, Greedy_Search, A_Star, IDA, SHC, SHC_Highest, stochastics_hill_climbing, random_restart_hill_climbing, local_beam_search
-
+from core.Algorithm import ALGORITHM_SOLVERS, ALGORITHM_NAMES
 from core import globals as g
 
 def UIPuzzle():
@@ -80,8 +79,7 @@ def UIPuzzle():
 
     #2. Thêm Combo Box
     #Thêm thuật toán 
-    list_bfs = ["Breadth-First Search 1", "Breadth-First Search 2", "Depth-First Search", "Iterative Deepening Search", "Uniform Cost Search", "Greedy Best-First Search", "A* Search", "Iterative Deepening A*", "Simple Hill Climbing", "Steepest-Ascent Hill Climbing",
-                "Stochastic Hill Climbing", "Random-Restart Hill Climbing", "Local Beam Search"]
+    list_bfs = ALGORITHM_NAMES
     bfs_combobox = ttk.Combobox(dashboard_frame, values = list_bfs, state = "readonly",width = 21)
     bfs_combobox.current(0)
     bfs_combobox.grid(row = 0, column = 0, columnspan = 2,  padx = 1, pady = 7, sticky = "nw")
@@ -94,8 +92,7 @@ def UIPuzzle():
         g.tk_da_duyet = 0
         g.tk_sinh_ra = 0
 
-        solvers = {"Breadth-First Search 1": BFS1, "Breadth-First Search 2": BFS2, "Depth-First Search": DFS, "Iterative Deepening Search": IDS, "Uniform Cost Search": UCS, "Greedy Best-First Search": Greedy_Search, "A* Search": A_Star, "Iterative Deepening A*": IDA, "Simple Hill Climbing": SHC, "Steepest-Ascent Hill Climbing": SHC_Highest,
-                   "Stochastic Hill Climbing": stochastics_hill_climbing, "Random-Restart Hill Climbing": random_restart_hill_climbing, "Local Beam Search": local_beam_search}        
+        solvers = ALGORITHM_SOLVERS     
         sol = solvers[che_do](g.ma_tran_puzzle)
 
         # Cập nhật GUI sau khi xong
@@ -107,10 +104,14 @@ def UIPuzzle():
             root.after(0, lambda: do_sau.config(text=f"Độ sâu: {len(sol)-1}"))
             root.after(0, lambda: da_duyet.config(text=f"Đã duyệt: {g.tk_da_duyet}"))
             root.after(0, lambda: sinh_ra.config(text=f"Sinh ra: {g.tk_sinh_ra}"))
+
+            if not sol[-1].isGoal():
+                root.after(0, lambda: log_text_frame.insert(tk.END, "Không tìm thấy đường đi đến đích! Bị kẹt tại cực trị địa phương.\n"))
             root.after(0, lambda: di_chuyen_tung_buoc(sol, 0, "Bắt đầu"))
         else:
             root.after(0, lambda: txt_duong_di.insert(tk.END, "Không tìm thấy đường đi!"))
             root.after(0, lambda: log_text_frame.insert(tk.END, "Không tìm thấy đường đi!\n"))
+            root.after(0, lambda: btn_giai.config(state=tk.NORMAL))
 
     def giai_ma_tran():
         btn_giai.config(state=tk.DISABLED)
@@ -168,7 +169,7 @@ def UIPuzzle():
         da_duyet.config(text="Đã duyệt: 0")
         sinh_ra.config(text="Sinh ra: 0")
         do_sau.config(text="Độ sâu: 0")
-        bfs_combobox.current(0)
+        #bfs_combobox.current(0)
         tam_dung_giai = False
         btn_tam_dung.config(text="Tạm dừng giải")
         txt_toc_do.delete("1.0", tk.END)
@@ -191,7 +192,7 @@ def UIPuzzle():
     sinh_ra = tk.Label(thong_ke_frame, text = "Sinh ra: 0", bg="lightgray")
     sinh_ra.pack(anchor = "w", padx = 3, pady = 3)
     #Độ sâu
-    do_sau = tk.Label(thong_ke_frame, text = "Độ sâ: 0", bg="lightgray")
+    do_sau = tk.Label(thong_ke_frame, text = "Độ sâu: 0", bg="lightgray")
     do_sau.pack(anchor = "w", padx = 3, pady = 3)
 
     #III. Thêm Log State:
@@ -237,7 +238,12 @@ def UIPuzzle():
         if index >= len(danh_sach_node):
             txt_duong_di.delete("1.0", tk.END)
             txt_duong_di.insert("1.0", chuoi_hien_tai + " --> END")
-            txt_duong_di.insert(tk.END, "\n ==== FINISH === \n")
+
+            if danh_sach_node[-1].isGoal():
+                txt_duong_di.insert(tk.END, "\n ==== FINISH === \n")
+            else:
+                txt_duong_di.insert(tk.END, "\n ==== THẤT BẠI: KẸT TẠI CỰC TRỊ ĐỊA PHƯƠNG === \n")
+            
             txt_duong_di.see(tk.END)
 
             btn_giai.config(state=tk.NORMAL)
