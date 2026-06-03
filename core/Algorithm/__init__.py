@@ -8,3 +8,7 @@ from .a_star import A_Star
 from .ida import IDA
 from .simple_hill_climbing import SHC
 from .simple_hill_climbing_highest import SHC_Highest
+from .local_beam_search import local_beam_search
+from .random_restart_hill_climbing import random_restart_hill_climbing
+from .stochastics_hill_climbing import stochastics_hill_climbing
+

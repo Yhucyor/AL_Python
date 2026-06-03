@@ -4,7 +4,7 @@ from tkinter import messagebox
 import json 
 import threading
 #Thêm thuật toán 
-from core.Algorithm import BFS1, BFS2, DFS, IDS, UCS, Greedy_Search, A_Star, IDA, SHC, SHC_Highest
+from core.Algorithm import BFS1, BFS2, DFS, IDS, UCS, Greedy_Search, A_Star, IDA, SHC, SHC_Highest, stochastics_hill_climbing, random_restart_hill_climbing, local_beam_search
 
 from core import globals as g
 
@@ -73,17 +73,18 @@ def UIPuzzle():
 
     #II. <=== Thêm bên bảng điều khiển ===>
     dashboard_frame = tk.Frame(main_frame, bg = "lightgray", bd = 1, relief = "groove")
-    dashboard_frame.grid(row = 0, column = 1, padx = 10, pady = 5, sticky = "nsew")
+    dashboard_frame.grid(row = 0, column = 1, padx = 11, pady = 5, sticky = "nsew")
     #1. Thêm nhãn 
     bfs_label = tk.Label(dashboard_frame, text = "Chế độ: ")
-    bfs_label.grid(row = 0, column = 0, padx = 1, pady = 7, sticky = "nw")
+    #bfs_label.grid(row = 0, column = 0, padx = 1, pady = 7, sticky = "nw")
 
     #2. Thêm Combo Box
     #Thêm thuật toán 
-    list_bfs = ["BFS1", "BFS2", "DFS", "IDS", "UCS", "Greedy_Search", "A_Star", "IDA", "SHC", "SHC_Highest"]
-    bfs_combobox = ttk.Combobox(dashboard_frame, values = list_bfs, state = "readonly",width = 10)
+    list_bfs = ["BFS1", "BFS2", "DFS", "IDS", "UCS", "Greedy_Search", "A_Star", "IDA", "SHC", "SHC_Highest",
+                "stochastics_hill_climbing", "random_restart_hill_climbing", "local_beam_search"]
+    bfs_combobox = ttk.Combobox(dashboard_frame, values = list_bfs, state = "readonly",width = 21)
     bfs_combobox.current(0)
-    bfs_combobox.grid(row = 0, column = 1, padx = 1, pady = 7, sticky = "nw")
+    bfs_combobox.grid(row = 0, column = 0, columnspan = 2,  padx = 1, pady = 7, sticky = "nw")
     
     #3. Nút giải 
     # Bên trong UIPuzzle
@@ -93,7 +94,8 @@ def UIPuzzle():
         g.tk_da_duyet = 0
         g.tk_sinh_ra = 0
 
-        solvers = {"BFS1": BFS1, "BFS2": BFS2, "DFS": DFS, "IDS": IDS, "UCS": UCS, "Greedy_Search": Greedy_Search, "A_Star": A_Star, "IDA": IDA, "SHC": SHC, "SHC_Highest": SHC_Highest}        
+        solvers = {"BFS1": BFS1, "BFS2": BFS2, "DFS": DFS, "IDS": IDS, "UCS": UCS, "Greedy_Search": Greedy_Search, "A_Star": A_Star, "IDA": IDA, "SHC": SHC, "SHC_Highest": SHC_Highest,
+                   "stochastics_hill_climbing": stochastics_hill_climbing, "random_restart_hill_climbing": random_restart_hill_climbing, "local_beam_search": local_beam_search}        
         sol = solvers[che_do](g.ma_tran_puzzle)
 
         # Cập nhật GUI sau khi xong
