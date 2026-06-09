@@ -11,21 +11,37 @@ from .local.simple_hill_climbing_highest import SHC_Highest
 from .local.local_beam_search import local_beam_search
 from .local.random_restart_hill_climbing import random_restart_hill_climbing
 from .local.stochastic_hill_climbing import stochastic_hill_climbing
+from .local.simulated_annealing import simulated_annealing
+from .environment_search.unobservable.bfs_belief_state import bfs_belief_state
+from .environment_search.partially_observable.dfs_partial_state import dfs_partial_state
 
-ALGORITHM_SOLVERS = {
-    "Breadth-First Search 1": BFS1, 
-    "Breadth-First Search 2": BFS2, 
-    "Depth-First Search": DFS, 
-    "Iterative Deepening Search": IDS, 
-    "Uniform Cost Search": UCS, 
-    "Greedy Best-First Search": Greedy_Search, 
-    "A* Search": A_Star, 
-    "Iterative Deepening A*": IDA, 
-    "Simple Hill Climbing": SHC, 
-    "Steepest-Ascent Hill Climbing": SHC_Highest,
-    "Stochastic Hill Climbing": stochastic_hill_climbing, 
-    "Random-Restart Hill Climbing": random_restart_hill_climbing, 
-    "Local Beam Search": local_beam_search
+ALGORITHM_GROUPS = {
+    "Uninformed Search": {
+        "Breadth-First Search 1": BFS1,
+        "Breadth-First Search 2": BFS2,
+        "Depth-First Search": DFS,
+        "Iterative Deepening Search": IDS,
+        "Uniform Cost Search": UCS
+    },
+    "Informed Search": {
+        "Greedy Best-First Search": Greedy_Search,
+        "A* Search": A_Star,
+        "Iterative Deepening A*": IDA
+    },
+    "Local Search": {
+        "Simple Hill Climbing": SHC,
+        "Steepest-Ascent Hill Climbing": SHC_Highest,
+        "Stochastic Hill Climbing": stochastic_hill_climbing,
+        "Random-Restart Hill Climbing": random_restart_hill_climbing,
+        "Local Beam Search": local_beam_search,
+        "Simulated Annealing": simulated_annealing
+    },
+    "Unobservable Environment": {
+        "BFS Belief State": bfs_belief_state
+    },
+    "Partially Observable Environment": {
+        "DFS Partial State": dfs_partial_state
+    }
 }
 
-ALGORITHM_NAMES = list(ALGORITHM_SOLVERS.keys())
+ALGORITHM_NAMES = list(ALGORITHM_GROUPS.keys())
