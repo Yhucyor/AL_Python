@@ -14,6 +14,10 @@ from .local.stochastic_hill_climbing import stochastic_hill_climbing
 from .local.simulated_annealing import simulated_annealing
 from .environment_search.unobservable.bfs_belief_state import bfs_belief_state
 from .environment_search.partially_observable.dfs_partial_state import dfs_partial_state
+from .environment_search.nondeterministic.and_or_graph_search import and_or_graph_search
+from .constraint_satisfaction.backtracking_search import backtracking_search
+from .constraint_satisfaction.backtracking_search_forward_checking import backtracking_search_forward_checking
+
 
 ALGORITHM_GROUPS = {
     "Uninformed Search": {
@@ -41,6 +45,14 @@ ALGORITHM_GROUPS = {
     },
     "Partially Observable Environment": {
         "DFS Partial State": dfs_partial_state
+    },
+    "NonDeterministic Environment": {
+        "And Or Graph Search": and_or_graph_search
+    },
+    "Contraint_Satisfication": {
+        "Backtracking Search": backtracking_search,
+        "Backtracking Search Forward Checking": backtracking_search_forward_checking
+        
     }
 }
 
