@@ -17,7 +17,8 @@ from .environment_search.partially_observable.dfs_partial_state import dfs_parti
 from .environment_search.nondeterministic.and_or_graph_search import and_or_graph_search
 from .constraint_satisfaction.backtracking_search import backtracking_search
 from .constraint_satisfaction.backtracking_search_forward_checking import backtracking_search_forward_checking
-
+from .constraint_satisfaction.min_conflicts import min_conflicts
+from .constraint_satisfaction.arc_consistency_3 import arc_consistency_3
 
 ALGORITHM_GROUPS = {
     "Uninformed Search": {
@@ -51,8 +52,9 @@ ALGORITHM_GROUPS = {
     },
     "Contraint_Satisfication": {
         "Backtracking Search": backtracking_search,
-        "Backtracking Search Forward Checking": backtracking_search_forward_checking
-        
+        "Backtracking Search Forward Checking": backtracking_search_forward_checking,
+        "Arc Consistency 3": arc_consistency_3,
+        "Min-Conflicts": min_conflicts
     }
 }
 
