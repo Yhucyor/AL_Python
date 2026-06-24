@@ -11,7 +11,6 @@ def min_conflicts(problem_matrix, max_steps=1000):
     path.append(Node(problem_matrix, None, "Init", 0, 0, 0))
     
     for step in range(1, max_steps + 1):
-        g.tk_sinh_ra += 1
         
         if csp.is_solution(current):
             return path
@@ -23,6 +22,7 @@ def min_conflicts(problem_matrix, max_steps=1000):
         var = random.choice(conflicted)
         min_conf = min(csp.count_conflicts(var, v, current) for v in range(9))
         best = [v for v in range(9) if csp.count_conflicts(var, v, current) == min_conf]
+        g.tk_sinh_ra += 9
         
         current[var] = random.choice(best)
         g.tk_da_duyet += 1

@@ -26,6 +26,7 @@ def backtrack(assignment, csp):
         return None
     
     for value in csp.domain_values(var, assignment):
+        g.tk_sinh_ra += 1
         if csp.is_consistent(var, value, assignment):
             assignment[var] = value
             

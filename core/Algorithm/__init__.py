@@ -16,7 +16,9 @@ from .environment_search.unobservable.bfs_belief_state import bfs_belief_state
 from .environment_search.partially_observable.dfs_partial_state import dfs_partial_state
 from .environment_search.nondeterministic.and_or_graph_search import and_or_graph_search
 from .constraint_satisfaction.backtracking_search import backtracking_search
+from .constraint_satisfaction.backtracking_search_1 import backtracking_search as backtracking_search_1
 from .constraint_satisfaction.backtracking_search_forward_checking import backtracking_search_forward_checking
+from .constraint_satisfaction.backtracking_search_forward_checking_1 import backtracking_forward_search as backtracking_forward_search_1
 from .constraint_satisfaction.min_conflicts import min_conflicts
 from .constraint_satisfaction.arc_consistency_3 import arc_consistency_3
 
@@ -51,8 +53,10 @@ ALGORITHM_GROUPS = {
         "And Or Graph Search": and_or_graph_search
     },
     "Contraint_Satisfication": {
-        "Backtracking Search": backtracking_search,
-        "Backtracking Search Forward Checking": backtracking_search_forward_checking,
+        "Backtracking Search (LRUD)": backtracking_search,
+        "Backtracking Search (Assignment)": backtracking_search_1,
+        "Backtracking Forward Checking (LRUD)": backtracking_search_forward_checking,
+        "Backtracking Forward Checking (Assignment)": backtracking_forward_search_1 ,
         "Arc Consistency 3": arc_consistency_3,
         "Min-Conflicts": min_conflicts
     }

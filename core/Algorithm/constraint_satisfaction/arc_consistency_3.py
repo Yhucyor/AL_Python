@@ -12,6 +12,7 @@ def arc_consistency_3(problem_matrix):
         for xj in csp.variables:
             if xi != xj:
                 queue.append((xi, xj))
+                g.tk_sinh_ra += 1
     
     while queue:
         xi, xj = queue.popleft()
@@ -24,6 +25,7 @@ def arc_consistency_3(problem_matrix):
             for xk in csp.neighbors(xi):
                 if xk != xj:
                     queue.append((xk, xi))
+                    g.tk_sinh_ra += 1
     
     #Thực hiện hiển thị lời giải 
     nodes = []
@@ -35,6 +37,5 @@ def arc_consistency_3(problem_matrix):
         state = copy.deepcopy(state)
         state[var[0]][var[1]] = val
         nodes.append(Node(state, nodes[-1], f"x{var[0]*3+var[1]+1}={val}", i+1, 0, 0))
-        g.tk_sinh_ra += 1
     
     return nodes

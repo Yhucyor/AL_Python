@@ -14,27 +14,27 @@ def UIPuzzle():
     root.title("Puzzle 3x3")
     #root.geometry("460x570+50+50")
     #I. <=== Thêm giao diện 
-    main_frame = tk.Frame(root, bg = "lightgray")
+    main_frame = tk.Frame(root, bg = "white")
     main_frame.pack(padx = 5, pady = 5, fill = tk.BOTH, expand = False)
 
     #1. Thêm frame bên trái chứa Puzzle
-    puzzle_frame = tk.Frame(main_frame, bg = "lightgray", bd = 1, relief = "groove")
+    puzzle_frame = tk.Frame(main_frame, bg = "#E3F2FD", bd = 1, relief = "groove")
     puzzle_frame.grid(row = 0, column = 0, padx = 5, pady = 5, sticky = "nsew")
     main_frame.grid_columnconfigure(1, weight=1)
 
     #2. Thêm Label tên ma trận
-    puzzle_label = tk.Label(puzzle_frame, text = "<=== Trò chơi Puzzle 8 (3x3) ===>", font = ("Helvetica", 12, "bold"))
+    puzzle_label = tk.Label(puzzle_frame, text = "<=== Trò chơi Puzzle 8 (3x3) ===>", bg="white", fg="#4B0082", font = ("Helvetica", 12, "bold"))
     puzzle_label.grid(row = 0)
     
     #3. Thêm các ô của ma trận
     # Canvas scrollable for multiple matrices
-    canvas_matrix = tk.Canvas(puzzle_frame, bg="lightgray", width=360, height=210, bd=0, highlightthickness=0)
+    canvas_matrix = tk.Canvas(puzzle_frame, bg="white", width=360, height=210, bd=0, highlightthickness=0)
     canvas_matrix.grid(row=1, column=0, sticky="nsew", pady=5)
     scrollbar_matrix = tk.Scrollbar(puzzle_frame, orient=tk.HORIZONTAL, command=canvas_matrix.xview)
     scrollbar_matrix.grid(row=2, column=0, sticky="ew")
     canvas_matrix.config(xscrollcommand=scrollbar_matrix.set)
     
-    grid_matrix_container = tk.Frame(canvas_matrix, bg="lightgray")
+    grid_matrix_container = tk.Frame(canvas_matrix, bg="white")
     frame_id = canvas_matrix.create_window((0, 0), window=grid_matrix_container, anchor="nw")
     
     def on_frame_configure(event):
@@ -72,26 +72,30 @@ def UIPuzzle():
         if len(matrices) == 1:
             # Thêm frame wrapper để center
             for idx, matrix in enumerate(matrices):
-                frame_single = tk.Frame(grid_matrix_container, bg="lightgray", padx=10, pady=5)
+                frame_single = tk.Frame(grid_matrix_container, bg="white", padx=10, pady=5)
                 frame_single.grid(row=0, column=0)
                 grid_matrix_container.grid_columnconfigure(0, weight=1)
                 
                 for i in range(3):
                     for j in range(3):
                         val = matrix[i][j]
-                        text_val = str(val) if val != 0 else ""
-                        lbl = tk.Label(frame_single, text=text_val, width=4, height=2, bd=3, relief="ridge", font=("Arial",14,"bold"))
+                        text_val = str(val) if val != 0 and val != -1 else ""
+                        bg_col = "#88BFEF" if val != 0 and val != -1 else "#E3F2FD"
+                        fg_col = "white" if val != 0 and val != -1 else "black"
+                        lbl = tk.Label(frame_single, text=text_val, width=4, height=2, bd=3, relief="ridge", bg=bg_col, fg=fg_col, font=("Arial",14,"bold"))
                         lbl.grid(row=i, column=j, padx=3, pady=3, sticky="nsew")
         else:
             # Nhiều ma trận thì xếp ngang
             for idx, matrix in enumerate(matrices):
-                frame_single = tk.Frame(grid_matrix_container, bg="lightgray", padx=10, pady=5)
+                frame_single = tk.Frame(grid_matrix_container, bg="white", padx=10, pady=5)
                 frame_single.grid(row=0, column=idx)
                 for i in range(3):
                     for j in range(3):
                         val = matrix[i][j]
-                        text_val = str(val) if val != 0 else ""
-                        lbl = tk.Label(frame_single, text=text_val, width=4, height=2, bd=3, relief="ridge", font=("Arial",14,"bold"))
+                        text_val = str(val) if val != 0 and val != -1 else ""
+                        bg_col = "#88BFEF" if val != 0 and val != -1 else "#E3F2FD"
+                        fg_col = "white" if val != 0 and val != -1 else "black"
+                        lbl = tk.Label(frame_single, text=text_val, width=4, height=2, bd=3, relief="ridge", bg=bg_col, fg=fg_col, font=("Arial",14,"bold"))
                         lbl.grid(row=i, column=j, padx=3, pady=3, sticky="nsew")
                     
         grid_matrix_container.update_idletasks()
@@ -107,10 +111,10 @@ def UIPuzzle():
     ma_tran_frame = tk.Frame(puzzle_frame, bg="white")
     ma_tran_frame.grid(row=3, column=0, pady=5)
     
-    nhap_label = tk.Label(ma_tran_frame, text="Nhập Start:")
+    nhap_label = tk.Label(ma_tran_frame, text="Nhập Start:", bg="white", fg="#0F172A", font=("Helvetica", 10, "bold"))
     nhap_label.grid(row=0, column=0, padx=3, pady=3, sticky="w")
     
-    nhap_goal_label = tk.Label(ma_tran_frame, text="Nhập Goal:")
+    nhap_goal_label = tk.Label(ma_tran_frame, text="Nhập Goal:", bg="white", fg="#0F172A", font=("Helvetica", 10, "bold"))
     nhap_goal_label.grid(row=0, column=1, padx=3, pady=3, sticky="w")
 
     def doi_ma_tran():
@@ -153,7 +157,7 @@ def UIPuzzle():
         except Exception as e:
             messagebox.showerror("Lỗi!", f"Định dạng ma trận sai!\n{e}")
 
-    btn_doi = tk.Button(ma_tran_frame, text = "Đổi", command = doi_ma_tran)
+    btn_doi = tk.Button(ma_tran_frame, text = "Đổi", command = doi_ma_tran, bg="#1D4ED8", fg="white")
     btn_doi.grid(row = 0, column = 2, sticky = "w")
     
     def load_test_data():
@@ -181,7 +185,7 @@ def UIPuzzle():
         except Exception as e:
             messagebox.showerror("Lỗi!", f"Lỗi đọc file: {e}")
     
-    btn_load = tk.Button(ma_tran_frame, text="Tải File Test", command=load_test_data)
+    btn_load = tk.Button(ma_tran_frame, text="Tải File Test", command=load_test_data, bg="#1D4ED8", fg="white")
     btn_load.grid(row=0, column=3, sticky="w", padx=5)            
 
     #Hiển thị ma trận bắt đầu 
@@ -198,11 +202,11 @@ def UIPuzzle():
    
 
     #II. <=== Thêm bên bảng điều khiển ===>
-    dashboard_frame = tk.Frame(main_frame, bg = "lightgray", bd = 1, relief = "groove")
+    dashboard_frame = tk.Frame(main_frame, bg = "white", bd = 1, relief = "groove")
     dashboard_frame.grid(row = 0, column = 1, padx = 11, pady = 5, sticky = "nsew")
     
     #1. Thêm nhãn môi trường 
-    env_label = tk.Label(dashboard_frame, text="Môi trường: ")
+    env_label = tk.Label(dashboard_frame, text="Môi trường: ", bg="white", fg="darkblue", font=("Helvetica", 10, "bold"))
     env_label.grid(row=0, column=0, padx=1, pady=2, sticky="nw")
     #Thêm phần combobox để chọn các loại môi trường 
     list_envs = list(ALGORITHM_GROUPS.keys())
@@ -211,13 +215,13 @@ def UIPuzzle():
     env_combobox.grid(row=1, column=0, columnspan=2, padx=1, pady=2, sticky="nw")    
     
     #2. Thêm nhãn thuật toán
-    bfs_label = tk.Label(dashboard_frame, text="Thuật toán: ")
+    bfs_label = tk.Label(dashboard_frame, text="Thuật toán: ", bg="white", fg="#008B8B", font=("Helvetica", 10, "bold"))
     bfs_label.grid(row=2, column=0, padx=1, pady=2, sticky="nw")    
     bfs_combobox = ttk.Combobox(dashboard_frame, state="readonly", width=22)
     bfs_combobox.grid(row=3, column=0, columnspan=2, padx=1, pady=2, sticky="nw")
 
     #3. Bên mù - kiểu như bên nào được cho và bên nào không được cho
-    loai_mu_frame = tk.Frame(dashboard_frame, bg="lightgray")
+    loai_mu_frame = tk.Frame(dashboard_frame, bg="white")
     loai_mu_var = tk.StringVar(value="Mù Start")
     #Cái này sẽ set ma trận sao để test tuật toán 
     def on_loai_mu_change():
@@ -234,7 +238,7 @@ def UIPuzzle():
                 g.goal_ma_tran = [[1, 2, 3], [4, 5, 6], [7, 8, 0]]
             else:
                 # Unobservable Mù Goal: 1 Start, 2 Goal
-                g.ma_tran_puzzle = [[[1, 2, 3], [4, 0, 5], [7, 8, 6]]]
+                g.ma_tran_puzzle = [[1, 2, 3], [4, 5, 0], [7, 8, 6]]
                 g.goal_ma_tran = [
                     [[1, 2, 3], [4, 5, 6], [7, 8, 0]],
                     [[1, 2, 3], [4, 0, 5], [7, 8, 6]]
@@ -260,9 +264,9 @@ def UIPuzzle():
         ve_ma_tran()
 
     #Thêm một số nút chọn để chọn  loại mù bên nào 
-    rb_mu_start = tk.Radiobutton(loai_mu_frame, text="Mù Start", variable=loai_mu_var, value="Mù Start", bg="lightgray", command=on_loai_mu_change)
+    rb_mu_start = tk.Radiobutton(loai_mu_frame, text="Mù Start", variable=loai_mu_var, value="Mù Start", bg="white", activebackground="white", command=on_loai_mu_change)
     rb_mu_start.pack(side=tk.LEFT)
-    rb_mu_goal = tk.Radiobutton(loai_mu_frame, text="Mù Goal", variable=loai_mu_var, value="Mù Goal", bg="lightgray", command=on_loai_mu_change)
+    rb_mu_goal = tk.Radiobutton(loai_mu_frame, text="Mù Goal", variable=loai_mu_var, value="Mù Goal", bg="white", activebackground="white", command=on_loai_mu_change)
     rb_mu_goal.pack(side=tk.LEFT)
 
     #4. Cập nhật thuật toán
@@ -385,7 +389,7 @@ def UIPuzzle():
         thread = threading.Thread(target=run_solver, args=(env_combobox.get(), bfs_combobox.get()), daemon=True)
         thread.start()
 
-    btn_giai = tk.Button(dashboard_frame, text="Giải Ma Trận", command=giai_ma_tran)
+    btn_giai = tk.Button(dashboard_frame, text="Giải Ma Trận", command=giai_ma_tran, bg="#28A745", fg="white", font=("Helvetica", 10, "bold"))
     btn_giai.grid(row=5, column=0, columnspan=2, padx=3, pady=3, sticky="nsew")      
     
     #6. Tạm dừng thực hiện:
@@ -398,11 +402,11 @@ def UIPuzzle():
         else:
             btn_tam_dung.config(text = "Tạm dừng giải")
 
-    btn_tam_dung = tk.Button(dashboard_frame, text = "Tạm dừng giải", command = tam_dung)
+    btn_tam_dung = tk.Button(dashboard_frame, text = "Tạm dừng giải", command = tam_dung, fg="#F59E0B", font=("Helvetica", 10, "bold"))
     btn_tam_dung.grid(row = 6, column = 0, columnspan = 2, padx = 3, pady = 3, sticky = "nsew")
 
     #7. Tốc độ giải: 
-    label_toc_do = tk.Label(dashboard_frame, text = "  Tốc độ di: ")
+    label_toc_do = tk.Label(dashboard_frame, text = "  Tốc độ di: ", bg="white", fg="#6f42c1", font=("Helvetica", 10, "bold"))
     label_toc_do.grid(row = 7, column = 0, padx = 3, pady = 3, sticky = "w")
     txt_toc_do = tk.Text(dashboard_frame, width = 4, height = 1)
     txt_toc_do.grid(row = 7, column = 1, padx = 3, pady = 3, sticky = "nsew")
@@ -446,23 +450,23 @@ def UIPuzzle():
     btn_reset.grid(row=8, column=0, columnspan=2, padx=5, pady=3, sticky="nsew")
     
     #10. Thêm bảng thống kê 
-    thong_ke_frame = tk.LabelFrame(dashboard_frame, text = "Thống kê thuật toán")
+    thong_ke_frame = tk.LabelFrame(dashboard_frame, text = "Thống kê thuật toán", bg="white", fg="#0D6EFD", bd=1)
     thong_ke_frame.grid(row = 9, column = 0, columnspan = 2, padx = 3, pady = 3, sticky = "nsew")
     #Bước đi
-    so_buoc = tk.Label(thong_ke_frame, text ="Số bước đi: 0", bg="lightgray")
+    so_buoc = tk.Label(thong_ke_frame, text ="Số bước đi: 0", bg="#E3F2FD")
     so_buoc.pack(anchor = "w", padx = 3, pady = 3)
     #Đã duyệt 
-    da_duyet = tk.Label(thong_ke_frame, text ="Đã duyệt: 0", bg="lightgray")
+    da_duyet = tk.Label(thong_ke_frame, text ="Đã duyệt: 0", bg="#E3F2FD")
     da_duyet.pack(anchor = "w", padx = 3, pady = 3)
     #Đã sinh
-    sinh_ra = tk.Label(thong_ke_frame, text = "Sinh ra: 0", bg="lightgray")
+    sinh_ra = tk.Label(thong_ke_frame, text = "Sinh ra: 0", bg="#E3F2FD")
     sinh_ra.pack(anchor = "w", padx = 3, pady = 3)
     #Độ sâu
-    do_sau = tk.Label(thong_ke_frame, text = "Độ sâu: 0", bg="lightgray")
+    do_sau = tk.Label(thong_ke_frame, text = "Độ sâu: 0", bg="#E3F2FD")
     do_sau.pack(anchor = "w", padx = 3, pady = 3)
 
     #III. Thêm Log State:
-    log_frame = tk.LabelFrame(root, text = "Log - State")
+    log_frame = tk.LabelFrame(root, text = "Log - State", bg="white", fg="#4B0082")
     log_frame.pack(side=tk.BOTTOM, fill=tk.BOTH, expand=False, padx=5, pady=5)
     #1. Thêm văn bản Log State 
     log_text_frame = tk.Text(log_frame, height=8, width=75, font=("Courier New", 9))
@@ -519,6 +523,11 @@ def UIPuzzle():
         if tam_dung_giai:
             root.after(100, lambda: di_chuyen_tung_buoc(danh_sach_node, index, chuoi_hien_tai))
             return
+        
+        # Chuyển dict thành list nếu cần (cho backtracking)
+        if isinstance(danh_sach_node, dict):
+            danh_sach_node = [danh_sach_node[i] for i in sorted(danh_sach_node.keys())]
+
         if index >= len(danh_sach_node):
             txt_duong_di.delete("1.0", tk.END)
             if isinstance(chuoi_hien_tai, list):
@@ -577,8 +586,10 @@ def UIPuzzle():
                 # Belief state - cập nhật đường đi cho tất cả states vì action áp dụng cho tất cả
                 new_chuoi_hien_tai = []
                 for i_state, s in enumerate(chuoi_hien_tai):
+                    idx_p = min(i_state, len(parent_node.ma_tran) - 1)
+                    idx_c = min(i_state, len(node_hien_tai.ma_tran) - 1)
                     # Nếu ma trận tại state này không đổi so với parent -> không đi được
-                    if parent_node.ma_tran[i_state] == node_hien_tai.ma_tran[i_state]:
+                    if parent_node.ma_tran[idx_p] == node_hien_tai.ma_tran[idx_c]:
                         new_chuoi_hien_tai.append(s + f" --(--)--> ")
                     else:
                         new_chuoi_hien_tai.append(s + f" --({hanh_dong}, C:{chi_phi})--> ")
@@ -598,7 +609,7 @@ def UIPuzzle():
             
         txt_duong_di.see(tk.END)
         try: 
-            giay = float(txt_toc_do.get().strip())
+            giay = float(txt_toc_do.get("1.0", tk.END).strip())
             mili_giay = int(giay*1000)
         except:
             mili_giay = 500
@@ -607,7 +618,7 @@ def UIPuzzle():
     #2. Đường đi
     duong_di_frame = tk.Frame(log_frame)
     duong_di_frame.pack(expand=False, fill=tk.X, padx=5, pady=5)
-    label_duong_di = tk.Label(duong_di_frame, text = "Đường đi: ")
+    label_duong_di = tk.Label(duong_di_frame, text = "Đường đi: ", bg="white", fg="#00BFFF")
     label_duong_di.pack(padx = 0, pady = 2, anchor = "w")
 
     #3. Thêm frame đương đi để kết hợp với scroll_ball
